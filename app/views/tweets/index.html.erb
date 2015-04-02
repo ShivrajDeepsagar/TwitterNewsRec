@@ -62,14 +62,16 @@
  <% end %>
  <br /> 
  <h2>News Articles</h2>
-  <div>
-      <% @news.each do |article|  %>
-         <%=link_to article, article %> <br/>
-      <% end %>
-  </div>
-
+   <% @htags.each do |query| %>
+       <% search = Google::Search::News.new do |search| %>
+        <% search.query = query %>
+        <% search.size = :small %>
+        <% end %>
+      <% search.first(5).each do |item| %>
+         <%= item.title %> <br />
+         <%= link_to item.uri, item.uri %> <br />
+         <% end %>
+   <% end %>
+ 
  <% end %>
-
-</div>
 <% end %>
-

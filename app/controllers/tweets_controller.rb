@@ -32,19 +32,16 @@ class TweetsController < ApplicationController
             end 
          end  
        end 
-       @news = []
-       @htags.each do |query|
-   
+      @news = []
+      @htags.each do |query|
         search = Google::Search::News.new do |search|
         search.query = query
         search.size = :small
-    
         end
- 
-       search.first(5).each do |item|
-          @news << item.uri 
-        end
-     end
+        search.first(5).each do |item|
+          @news << item.uri
+         end
+      end
       respond_with(@tweets)
     end
     

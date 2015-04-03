@@ -1,9 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <% if !current_user.nil? %>
-<h1>Listing Tweets</h1>
 
-<table>
+<!-- <table>
   <thead>
     <tr>
       <th>User</th>
@@ -27,12 +26,15 @@
     <% end %>
    
   </tbody>
-</table>
+</table> -->
 
 <br>
 
-<%= link_to 'New Tweet', new_tweet_path %>
-<br>
+<h4> Feel like tweeting !</h4>
+<a href="tweets/new" class="btn btn-info" role="button">Tweet</a>
+<br/> <br/>
+<h1>Listing Tweets</h1>
+
 <div>
  <% if @my_tweets.nil? %>
    <p>Value is nil unfortunately</p>

@@ -40,7 +40,8 @@ class TweetsController < ApplicationController
   end
 
   def show
-    respond_with(@tweet)
+    #respond_with(@tweet)
+    redirect_to :action => "index"
   end
 
   def new

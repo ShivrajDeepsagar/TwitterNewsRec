@@ -7,7 +7,7 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module Tweeter
-    require "google-search"
+    
   class Application < Rails::Application
 
     # Settings in config/environments/* take precedence over those specified here.

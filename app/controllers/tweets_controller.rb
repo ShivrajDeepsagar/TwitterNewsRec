@@ -24,7 +24,7 @@ class TweetsController < ApplicationController
       for tweet in  @my_tweets 
        words = tweet.text.split(/ /) 
          for word in words 
-           if word.include?("#") 
+           if word.include?("#") || word.include?("@")
               word.slice!(0) 
               if !word.nil?
                 @htags << word 

@@ -28,6 +28,8 @@
   </tbody>
 </table> -->
 
+<!--%= image_tag '21.jpeg' %-->
+
 <br>
 
 <h4> Feel like tweeting !</h4>
@@ -43,7 +45,7 @@
   <% words = tweet.text.split(/ /) %>
   <% @hash_tags = [] %>
   <% for word in words %>
-   <%  if word.include?("#") %>
+   <%  if word.include?("#") || word.include?("@") %>
         <% word.slice!(0) %>
     <%  @hash_tags << word %>
    <% end %>
@@ -53,7 +55,7 @@
     <%= tweet.text %>
       <br />
     <% if !@hash_tags.empty? %>
-        The hash tags are
+        The keywords are
 
         <% for tag in @hash_tags %>
           <%= tag %>
@@ -69,9 +71,15 @@
         <% search.query = query %>
         <% search.size = :small %>
         <% end %>
-      <% search.first(5).each do |item| %>
-         <%= item.title %> <br />
-         <%= link_to item.uri, item.uri %> <br />
+      <% search.first(4).each do |item| %>
+         <h4><%= item.title.html_safe %><h4><br />
+         <% result = Google::Search::Image.new(:query => item.title, :image_size => :xlarge) %>
+         <%  r = result.first(5) %>
+         <% r.each do |image| %>
+            <%= image_tag "#{image.uri}",  :size => "200x200" %>
+         <% end %>
+         <br />
+         <%= link_to item.uri, item.uri %> <br /><br />
          <% end %>
    <% end %>
  

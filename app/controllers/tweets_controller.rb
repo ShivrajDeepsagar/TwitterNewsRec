@@ -4,8 +4,6 @@ require 'google-search'
 class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
   
-  
-  
   respond_to :html
 
   def index
@@ -21,6 +19,8 @@ class TweetsController < ApplicationController
       end
       @my_tweets = client.user_timeline(current_user.name)
       @htags = []
+      Hashtag.delete_all
+      hashes = current_user.hashtags
       for tweet in  @my_tweets 
        words = tweet.text.split(/ /) 
          for word in words 
@@ -32,6 +32,20 @@ class TweetsController < ApplicationController
             end 
          end  
        end 
+       
+       if hashes.empty?
+         @htags.uniq.each do |word|
+            Hashtag.create(:user_id => current_user.id, :word => word, :count => @htags.count(word))
+         end
+       #else
+           #@htags.uniq.each do |word|
+             #hash_word = Hashtag.where('user_id = ? AND word = ?', current_user.id, word).first
+             #hash_word.count = @htags.count(word)
+             #hash_word.save
+           #end
+       end
+
+
       @news = []
       
       respond_with(@tweets)
@@ -56,6 +70,7 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new(tweet_params)
     @tweet.user_id = current_user.id
     @tweet.save
+
     respond_with(@tweet)
   end
 

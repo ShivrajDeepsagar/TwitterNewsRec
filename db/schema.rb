@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320075025) do
+ActiveRecord::Schema.define(version: 20150407071811) do
 
   create_table "hashtags", force: true do |t|
     t.integer  "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
-    t.integer  "keyword_id"
+    t.string   "word"
   end
 
   create_table "keywords", force: true do |t|

@@ -66,7 +66,7 @@
  <% end %>
  <br /> 
  <h2>News Articles</h2>
-   <% @htags.uniq.shuffle.each do |query| %>
+   <% @kwords.uniq.each do |query| %>
        <% search = Google::Search::News.new do |search| %>
         <% search.query = query %>
         <% search.size = :small %>

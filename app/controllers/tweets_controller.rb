@@ -1,4 +1,4 @@
-$:.unshift File.dirname(__FILE__) + '/../lib'
+#$:.unshift File.dirname(__FILE__) + '/../lib'
 require 'rubygems'
 require 'google-search'
 class TweetsController < ApplicationController
@@ -44,10 +44,11 @@ class TweetsController < ApplicationController
              #hash_word.save
            #end
        end
-
-
-      @news = []
-      
+       @kwords = []
+       @key_words = Hashtag.order('count DESC')
+       @key_words.each do |w|
+         @kwords << w.word
+       end
       respond_with(@tweets)
     end
     

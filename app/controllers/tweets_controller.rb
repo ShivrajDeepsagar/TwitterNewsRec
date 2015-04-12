@@ -129,7 +129,7 @@ class TweetsController < ApplicationController
       html = agent.get(url).body
       html_doc = Nokogiri::HTML(html)
       list = html_doc.xpath("//h2[@class='esc-lead-article-title']")
-      list_6 = list.first(6)
-      return list_6
+      list_4 = list.first(4)
+      return list_4
     end
 end

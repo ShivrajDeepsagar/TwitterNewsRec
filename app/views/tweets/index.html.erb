@@ -90,7 +90,7 @@
    <% @list_top.each do |i| %>
      <h4><%= i.text %></h4>
      <% result = Google::Search::Image.new(:query => i.text, :image_size => :xlarge) %>
-         <% r = result.first(3) %>
+         <% r = result.first(1) %>
          <% r.each do |image| %>
                 <%= image_tag "#{image.uri}",:size => "150x150" %>
          <% end %><br />
@@ -100,7 +100,7 @@
    <% @list_tech.each do |i| %>
      <h4><%= i.text %></h4>
      <% result = Google::Search::Image.new(:query => i.text, :image_size => :xlarge) %>
-         <% r = result.first(3) %>
+         <% r = result.first(1) %>
          <% r.each do |image| %>
                 <%= image_tag "#{image.uri}",:size => "150x150" %>
          <% end %><br />
@@ -110,7 +110,7 @@
    <% @list_india.each do |i| %>
      <h4><%= i.text %></h4>
      <% result = Google::Search::Image.new(:query => i.text, :image_size => :xlarge) %>
-         <% r = result.first(3) %>
+         <% r = result.first(1) %>
          <% r.each do |image| %>
                 <%= image_tag "#{image.uri}",:size => "150x150" %>
          <% end %><br />
@@ -120,7 +120,7 @@
    <% @list_world.each do |i| %>
      <h4><%= i.text %></h4>
      <% result = Google::Search::Image.new(:query => i.text, :image_size => :xlarge) %>
-         <% r = result.first(3) %>
+         <% r = result.first(1) %>
          <% r.each do |image| %>
                 <%= image_tag "#{image.uri}",:size => "150x150" %>
          <% end %><br />
@@ -130,7 +130,7 @@
    <% @list_business.each do |i| %>
      <h4><%= i.text %></h4>
      <% result = Google::Search::Image.new(:query => i.text, :image_size => :xlarge) %>
-         <% r = result.first(3) %>
+         <% r = result.first(1) %>
          <% r.each do |image| %>
                 <%= image_tag "#{image.uri}",:size => "150x150" %>
          <% end %><br />
@@ -140,7 +140,7 @@
    <% @list_entertainment.each do |i| %>
      <h4><%= i.text %></h4>
      <% result = Google::Search::Image.new(:query => i.text, :image_size => :xlarge) %>
-         <% r = result.first(3) %>
+         <% r = result.first(1) %>
          <% r.each do |image| %>
                 <%= image_tag "#{image.uri}",:size => "150x150" %>
          <% end %><br />
@@ -150,7 +150,7 @@
    <% @list_sports.each do |i| %>
      <h4><%= i.text %></h4>
      <% result = Google::Search::Image.new(:query => i.text, :image_size => :xlarge) %>
-         <% r = result.first(3) %>
+         <% r = result.first(1) %>
          <% r.each do |image| %>
                 <%= image_tag "#{image.uri}",:size => "150x150" %>
          <% end %><br />
@@ -160,7 +160,7 @@
    <% @list_science.each do |i| %>
      <h4><%= i.text %></h4>
      <% result = Google::Search::Image.new(:query => i.text, :image_size => :xlarge) %>
-         <% r = result.first(3) %>
+         <% r = result.first(1) %>
          <% r.each do |image| %>
                 <%= image_tag "#{image.uri}",:size => "150x150" %>
          <% end %><br />
@@ -170,7 +170,7 @@
    <% @list_health.each do |i| %>
      <h4><%= i.text %></h4>
      <% result = Google::Search::Image.new(:query => i.text, :image_size => :xlarge) %>
-         <% r = result.first(3) %>
+         <% r = result.first(1) %>
          <% r.each do |image| %>
                 <%= image_tag "#{image.uri}",:size => "150x150" %>
          <% end %><br />

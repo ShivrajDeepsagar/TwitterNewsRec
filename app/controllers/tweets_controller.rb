@@ -4,7 +4,7 @@ require 'google-search'
 require 'mechanize'
 class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
-  
+  skip_before_action :verify_authenticity_token
   respond_to :html
 
   def index
@@ -18,7 +18,7 @@ class TweetsController < ApplicationController
        config.access_token        = "2992787178-A7b9hs7GXJSMTnTEtVlPTAhPy3zt1NERk2R8UrZ"
        config.access_token_secret = "NPJFJrgoRlIDKjYE1gYaO5OFIcXsy6hWCzNuHBMRsHlim"
       end
-      @my_tweets = client.user_timeline(current_user.name)
+      @my_tweets = client.user_timeline(current_user.name) #(current_user.name,:count => 30)
       @htags = []
       Hashtag.delete_all
       hashes = current_user.hashtags
@@ -75,7 +75,7 @@ class TweetsController < ApplicationController
       @list_sports = get_list(url)
       #Science
       url = 'https://news.google.co.in/news/section?pz=1&cf=all&ned=in&topic=snc&siidp=b300874a3c17eecdffe434d086fac5c626e6&ict=ln'
-      agent = Mechanize.new { |agent| agent.user_agent_alias = "Mac Safari" }
+      #agent = Mechanize.new { |agent| agent.user_agent_alias = "Mac Safari" }
       @list_science = get_list(url)
       #Health
       url = 'https://news.google.co.in/news/section?pz=1&cf=all&ned=in&topic=m&siidp=0b8f8f8472add2a9b8330d6195161ff45a12&ict=ln'
@@ -97,12 +97,13 @@ class TweetsController < ApplicationController
   def edit
   end
 
+
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.user_id = current_user.id
     @tweet.save
-
-    respond_with(@tweet)
+    redirect_to :action => "index"
+    #respond_with(@tweet)
   end
 
   def update
@@ -125,7 +126,7 @@ class TweetsController < ApplicationController
     end
     def get_list(link)
       url = link
-      agent = Mechanize.new { |agent| agent.user_agent_alias = "Mac Safari" }
+      agent = Mechanize.new #{ |agent| agent.user_agent_alias = "Mac Safari" }
       html = agent.get(url).body
       html_doc = Nokogiri::HTML(html)
       list = html_doc.xpath("//h2[@class='esc-lead-article-title']")

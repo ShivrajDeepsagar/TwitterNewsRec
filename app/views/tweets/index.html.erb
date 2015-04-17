@@ -31,13 +31,21 @@
 <!--%= image_tag '21.jpeg' %-->
 
 <br>
+  <div>
+     <button class="btn btn-primary btn-lg" data-toggle="modal" 
+          data-target="#myModal">
+       Feel Like Tweeting
+     </button>
+  </div>  
 
-<h4> Feel like tweeting !</h4>
-<a href="tweets/new" class="btn btn-info" role="button">Tweet</a>
+    
+
+
+<div>
 <br/> <br/>
 <h1>Listing Tweets</h1>
 
-<div>
+
  <% if @my_tweets.nil? %>
    <p>Value is nil unfortunately</p>
  <% else %>
@@ -178,3 +186,41 @@
    <% end %>
    </div>
 <% end %>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+      aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+      <form accept-charset="UTF-8" action="/tweets" class="new_tweet" id="new_tweet" method="post">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               Tweet Away !
+            </h4>
+         </div>
+
+          <div class="modal-body">
+           
+           
+              <div class="form-group">
+                <textarea class="form-control" rows="5" id="tweet_body" name="tweet[body]"></textarea>
+               
+              </div>
+            
+         </div>
+         <div class="modal-footer">
+            <input class="btn btn-info" type="submit" value="Tweet"></input>
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">Close
+            </button>
+          
+         </div>
+        </div><!-- /.modal-content -->
+      </form>
+     </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+  </div>
+<br/>

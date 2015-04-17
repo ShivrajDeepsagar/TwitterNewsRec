@@ -58,3 +58,5 @@ gem 'twitter', '~> 5.13.0'
 gem 'google-search'
 gem 'mini_magick'
 gem 'mechanize'
+
+gem 'bootstrap-modal-rails'

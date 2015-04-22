@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407071811) do
+ActiveRecord::Schema.define(version: 20150422092800) do
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.string   "google_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "hashtags", force: true do |t|
     t.integer  "count"

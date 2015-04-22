@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+<br />
+<!--<p>
+  <strong>Name:</strong>
+  <%= @category.name %>
+</p>
+
+<p>
+  <strong>Google url:</strong>
+  <%= @category.google_url %>
+</p>
+<br />
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>-->
+<br />
+ <h3><%= @category.name %></h3 >
+   <% @recent_news.each do |i| %>
+     <h4><%= i.text %></h4>
+     <% result = Google::Search::Image.new(:query => i.text, :image_size => :xlarge) %>
+         <% r = result.first(1) %>
+         <% r.each do |image| %>
+                <%= image_tag "#{image.uri}",:size => "300x215" %>
+         <% end %><br />
+     <%= link_to i.children[0].attributes['url'].to_s, i.children[0].attributes['url'].to_s %> <br />
+   <% end %>
+<br>
+

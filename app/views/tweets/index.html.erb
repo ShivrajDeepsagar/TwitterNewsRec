@@ -1,3 +1,4 @@
+
 <p id="notice"><%= notice %></p>
 
 <% if !current_user.nil? %>
@@ -74,21 +75,59 @@
  <% end %>
  <br /> 
  <h2>News Articles</h2>
-   <% recent_3 = @htags.first(3) %>
-   <% recent_3.each do |query| %>
-       <% search = Google::Search::News.new do |search| %>
-        <% search.query = query %>
-        <% search.size = :small %>
-        <% end %>
-      <% search.first(4).each do |item| %>
-         <h4><%= item.title.html_safe %><h4><br />
-         <% result = Google::Search::Image.new(:query => item.title, :image_size => :large) %>
-         <% r = result.first(3) %>
-         <% r.each do |image| %>
-                <%= image_tag "#{image.uri}",:size => "560x330"%>
-         <% end %><br />
-         <%= link_to item.uri, item.uri %> <br /><br />
-      <% end %>
+   <% recent_3 = @htags.first(10) %>
+   <% recent_3.each do |tag| %>
+       <% 
+
+        require 'mechanize'
+
+        agent = Mechanize.new
+        page = agent.get('http://www.google.com/')
+
+        google_form = page.form('f')
+        google_form.q = tag
+
+        page = agent.submit(google_form, google_form.buttons.first)
+
+
+ %> 
+ 
+ <% valid_links = [] %>
+ 
+ <% for link in page.links %>
+  <% if !(link.href.include?"cache")  && !(link.href.include?("/search")) && (link.href.include?("/url?q="))%>
+   <% url = link.href.split(/&sa/).first.split(//) %>
+   <% 7.times do %> 
+    <% url.delete_at(0) %>
+   <% end %> 
+    <%unless (url.join.include? "wikipedia") || (url.join.include? "imdb") ||(url.join.include? "twitter") %>
+          <% valid_links.push(url.join) %> 
+      <%end%>
+  <% end %>
+ <% end %>
+ 
+ <%# valid_links %>
+
+ <h2>News Article Links</h2>
+ <ul>
+ <% for link in valid_links %>
+     <li>
+          <a href="<%= link %>" target="_blank"> <%= link %> </a>
+     </li>
+ <% end %>
+ </ul>
+ 
+ <ul>
+ <table>
+ <tr>     
+ <% for link in page.images.first(10) %>
+   <td>    
+     <%= image_tag(link.uri) %>
+   </td> 
+ <% end %>
+ </tr>
+ </table>
+ </ul>
     <% end %>
    <% all_articles = @kwords - recent_3 %>
    <% all_articles.uniq.each do |query| %>

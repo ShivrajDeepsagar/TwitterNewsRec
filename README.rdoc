@@ -1,11 +1,13 @@
-== README
+== Personalized News Recommender Using Twitter
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This rails application aims to create a method to build personal profiles using the information obtained from twitter to provide
+personalized news recommendation service. For a Twitter user, this app utilizes tweets, re-tweets and hashtags, from which important
+keywords are extracted to build personal profiles. The usefulness of this method is validated by implementing a prototype news
+recommendation service and by performing a user study.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version 
 
 * System dependencies
 
